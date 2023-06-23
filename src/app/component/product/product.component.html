@@ -1,0 +1,40 @@
+<h1 class="mb-4 d-flex align-items-center justify-content-between">
+  Product List
+  <button class="btn btn-info" (click)="addProduct()">Add Product</button>
+</h1>
+<div class="product-list">
+  <p class="fw-bold"> Total Products: {{(products$ | async)?.length}} </p>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>OwnerName</th>
+        <th>Developers</th>
+        <th>ScrumMaster Name</th>
+        <th>Start Date</th>
+        <th>Methodology</th>
+        <th>Location</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products$ | async">
+        <td>{{product.productName}}</td>
+        <td>{{product.productOwnerName}}</td>
+        <td>{{product.developers}}</td>
+        <td>{{product.scrumMasterName}}</td>
+        <td>{{product.startDate}}</td>
+        <td>{{product.methodology}}</td>
+        <td>
+          <button class="btn btn-link" (click)="openLink(product.location)">
+            {{locationName(product.location)}}
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary m-1" (click)="editProduct(product) ">Edit</button>
+          <button class="btn btn-danger m-1" (click)="deleteProduct(product) ">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

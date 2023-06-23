@@ -1,0 +1,82 @@
+<div class="container">
+  <div [formGroup]="form">
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input formControlName="productName" placeholder="Product Name" name="productName" class="form-control" id="productName">
+      <div class="text-danger" *ngIf="isInvalid('productName')">
+        Product Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="productOwnerName">Product Owner Name:</label>
+      <input formControlName="productOwnerName" placeholder="Product Owner Name" name="productOwnerName" class="form-control" id="productOwnerName">
+      <div class="text-danger" *ngIf="isInvalid('productOwnerName')">
+        Product Owner Name is required.
+      </div>
+    </div>
+
+    <div class="form-group mb-5">
+      <label>Developers:</label>
+      <button class='btn btn-primary float-end' [disabled]="reachMax" (click)="addDeveloper()">
+        Add Developer
+      </button>
+      <div class="text-danger mt-3" *ngIf="isInvalid('developers')">
+        Developer is required.
+      </div>
+      <div *ngFor="let developerForm of developerControls;let i = index" class="col-8">
+        <div class="mt-3">
+          No {{i + 1}} developer:
+        </div>
+
+        <div class="form-group">
+            <input type="text" [formControl]="developerControls[i]">
+            <div class="text-danger" *ngIf="isDeveloperInvalid(i)">
+              Developer Name is required.
+            </div>
+        </div>
+        <button class='btn btn-danger' (click)="removeDeveloper(i)">
+          Remove Developer
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="scrumMasterName">Scrum Master Name:</label>
+      <input formControlName="scrumMasterName" placeholder="Scrum Master Name" name="scrumMasterName" class="form-control" id="scrumMasterName">
+      <div class="text-danger" *ngIf="isInvalid('scrumMasterName')">
+        Scrum Master Name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input type="date" formControlName="startDate" placeholder="Start Date" name="startDate" class="form-control" id="startDate">
+      <div class="text-danger" *ngIf="isInvalid('startDate')">
+        Start Date is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="methodology">Methodology:</label>
+      
+      <select formControlName="methodology">
+        <option value="">Choose your Methodology</option>
+        <option *ngFor="let meth of methodology" [ngValue]="meth">{{meth}}</option>
+      </select>
+
+      <div class="text-danger" *ngIf="isInvalid('methodology')">
+        Methodology is required.
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="location">Location: <span class="small text-secondary">Start with https://github.com/bcgov/***</span></label>
+      <input formControlName="location" placeholder="Location" name="location" class="form-control" id="location">
+      <div class="text-danger" *ngIf="isInvalid('location')">
+        Location is required.
+      </div>
+    </div>
+  </div>
+</div>
